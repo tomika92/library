@@ -6,10 +6,8 @@ import models.User;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.Base64;
 
 public class registerFrame extends JFrame {
     private JTextField loginFieldR;
@@ -33,7 +31,6 @@ public class registerFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 registerUser();
-                //TODO check is login in db, check is email in db, hash password, insert to db
             }
         });
     }
@@ -56,6 +53,13 @@ public class registerFrame extends JFrame {
             return;
         }
 
+        if(checkUser(login, email) == false){
+            JOptionPane.showMessageDialog(this,"Is user with this login or email", "Try again", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        password = encodeBase64(password);
+
         user = addNewUser(login, email, firstName, lastName, password);
         if (user != null){
             dispose();
@@ -65,11 +69,38 @@ public class registerFrame extends JFrame {
         }
     }
 
+    private boolean checkUser(String login, String email) {
+        boolean var = true;
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
+            Statement stmt = con.createStatement();
+            String sql = "SELECT ID_user FROM users WHERE email=? OR login=?";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, login);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                var = false;
+            }
+            stmt.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return var;
+    }
+
+    private String encodeBase64(String password) {
+        Base64.Encoder encoder = Base64.getEncoder();
+        String encodedPassword = encoder.encodeToString(password.getBytes());
+        return encodedPassword;
+    }
+
     private User addNewUser(String login, String email, String firstName, String lastName, String password) {
         User user = null;
 
         try{
-            //Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library","root", "MyNewPass");
             Statement stmt = con.createStatement();
             String sql = "INSERT INTO users (login, email, first_name, last_name, password) VALUES (?, ?, ?, ?, ?)";
