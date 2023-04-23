@@ -4,6 +4,7 @@ package frames;
 import models.*;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -13,18 +14,6 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Arrays;
 
-class JTableButtonRenderer extends JButton implements TableCellRenderer {
-    private TableCellRenderer defaultRenderer;
-    public JTableButtonRenderer(TableCellRenderer renderer) {
-        defaultRenderer = renderer;
-    }
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        if(value instanceof Component)
-            return (Component)value;
-        return defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-    }
-}
-
 public class UserFrame extends JFrame {
     private JLabel nameSurnameField;
     private JButton logoutButton;
@@ -32,19 +21,20 @@ public class UserFrame extends JFrame {
     private JTextField searchField;
     private JTable SearchTable;
     private JPanel userPanel;
+    private JScrollPane SearchPane;
 
     public UserFrame() {
         setContentPane(userPanel);
         setTitle("user panel");
-        TableCellRenderer tableRenderer;
+        //TableCellRenderer tableRenderer;
         setSize(600, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         nameSurnameField.setText(getNameSurname(Singleton.getInstance().getValue()));
         SearchTable.setModel(getSearchTable());
-        tableRenderer = SearchTable.getDefaultRenderer(JButton.class);
-        SearchTable.setDefaultRenderer(JButton.class, new JTableButtonRenderer(tableRenderer));
-        //SearchTable.getColumn("order").setCellRenderer(new JTableButtonRenderer(tableRenderer));
+        SearchTable.getColumn("order").setCellRenderer(new ButtonRenderer());
+        SearchTable.getColumn("order").setCellEditor(new ButtonEditor(new JCheckBox()));
+
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
@@ -117,4 +107,76 @@ public class UserFrame extends JFrame {
         return user.toString();
     }
 
+}
+class ButtonRenderer extends JButton implements TableCellRenderer {
+
+    public ButtonRenderer() {
+        setOpaque(true);
+    }
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        if (isSelected) {
+            setForeground(table.getSelectionForeground());
+            setBackground(table.getSelectionBackground());
+        } else {
+            setForeground(table.getForeground());
+            setBackground(UIManager.getColor("Button.background"));
+        }
+        setText((value == null) ? "" : value.toString());
+        return this;
+    }
+}
+
+class ButtonEditor extends DefaultCellEditor {
+    protected JButton button;
+
+    private String label;
+
+    private boolean isPushed;
+
+    public ButtonEditor(JCheckBox checkBox) {
+        super(checkBox);
+        button = new JButton();
+        button.setOpaque(true);
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fireEditingStopped();
+            }
+        });
+    }
+
+    public Component getTableCellEditorComponent(JTable table, Object value,
+                                                 boolean isSelected, int row, int column) {
+        if (isSelected) {
+            button.setForeground(table.getSelectionForeground());
+            button.setBackground(table.getSelectionBackground());
+        } else {
+            button.setForeground(table.getForeground());
+            button.setBackground(table.getBackground());
+        }
+        label = (value == null) ? "" : value.toString();
+        button.setText(label);
+        isPushed = true;
+        return button;
+    }
+
+    public Object getCellEditorValue() {
+        if (isPushed) {
+            //
+            //
+            JOptionPane.showMessageDialog(button, label + ": Ouch!");
+            // System.out.println(label + ": Ouch!");
+        }
+        isPushed = false;
+        return new String(label);
+    }
+
+    public boolean stopCellEditing() {
+        isPushed = false;
+        return super.stopCellEditing();
+    }
+
+    protected void fireEditingStopped() {
+        super.fireEditingStopped();
+    }
 }
