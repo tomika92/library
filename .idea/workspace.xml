@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="login, register, singleton">
-      <change afterPath="$PROJECT_DIR$/src/models/Audiobook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/Book.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/Film.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/Magazine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/libraryCollection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/libraryCollectionFactory.java" afterDir="false" />
+    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="factory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/userFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/userFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/workerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/workerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/RegisterFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Audiobook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Audiobook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Film.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/LibraryCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LibraryCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Magazine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,26 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Studia/VI semestr/Technologie obiektowe/Projekt/library/mysql-connector-j-8.0.33.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Studia/VI semestr/Technologie obiektowe/Projekt/library/mysql-connector-j-8.0.33.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propGUI"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Studia\VI semestr\Technologie obiektowe\Projekt\library" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="loginFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="frames.loginFrame" />
+    <configuration name="LoginFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="frames.LoginFrame" />
       <module name="library" />
       <extension name="coverage">
         <pattern>
@@ -70,7 +74,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.loginFrame" />
+        <item itemvalue="Application.LoginFrame" />
       </list>
     </recent_temporary>
   </component>
@@ -83,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681828782533</updated>
       <workItem from="1681828783971" duration="14235000" />
-      <workItem from="1682232584372" duration="7187000" />
+      <workItem from="1682232584372" duration="27429000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681828888500</created>
@@ -99,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682020168916</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="factory">
+      <created>1682244273849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682244273850</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +131,33 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="login and register" />
     <MESSAGE value="login, register, singleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="login, register, singleton" />
+    <MESSAGE value="factory" />
+    <option name="LAST_COMMIT_MESSAGE" value="factory" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Book.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Film.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Magazine.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/Audiobook.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

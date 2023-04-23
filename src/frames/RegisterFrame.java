@@ -3,6 +3,7 @@ package frames;
 import models.User;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -20,10 +21,10 @@ public class RegisterFrame extends JFrame {
 
     public User user;
 
-    public RegisterFrame(){
+    public RegisterFrame() {
         setContentPane(registerPanel);
         setTitle("register");
-        setSize(450,450);
+        setSize(450, 450);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         registerButtonR.addActionListener(new ActionListener() {
@@ -42,29 +43,28 @@ public class RegisterFrame extends JFrame {
         String password = String.valueOf(passwordFieldR.getPassword());
         String confirmPassword = String.valueOf(repeatPasswordFieldR.getPassword());
 
-        if(firstName.isEmpty() || lastName.isEmpty() || login.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()){
+        if (firstName.isEmpty() || lastName.isEmpty() || login.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter all fields", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (!password.equals(confirmPassword)){
-            JOptionPane.showMessageDialog(this,"Password is not the same", "Try again", JOptionPane.ERROR_MESSAGE);
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Password is not the same", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if(checkUser(login, email) == false){
-            JOptionPane.showMessageDialog(this,"Is user with this login or email", "Try again", JOptionPane.ERROR_MESSAGE);
+        if (checkUser(login, email) == false) {
+            JOptionPane.showMessageDialog(this, "Is user with this login or email", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         password = encodeBase64(password);
 
         user = addNewUser(login, email, firstName, lastName, password);
-        if (user != null){
+        if (user != null) {
             dispose();
-        }
-        else{
-            JOptionPane.showMessageDialog(this,"Impossibile to register", "Try again", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Impossibile to register", "Try again", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -79,7 +79,7 @@ public class RegisterFrame extends JFrame {
             preparedStatement.setString(2, login);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 var = false;
             }
             stmt.close();
@@ -99,8 +99,8 @@ public class RegisterFrame extends JFrame {
     private User addNewUser(String login, String email, String firstName, String lastName, String password) {
         User user = null;
 
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library","root", "MyNewPass");
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
             Statement stmt = con.createStatement();
             String sql = "INSERT INTO users (login, email, first_name, last_name, password) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -111,14 +111,15 @@ public class RegisterFrame extends JFrame {
             preparedStatement.setString(5, password);
 
             int addedRow = preparedStatement.executeUpdate();
-            if(addedRow > 0){
-                user = new User(firstName,lastName,login,password,email);
+            if (addedRow > 0) {
+                user = new User(firstName, lastName, login, password, email);
             }
             stmt.close();
             con.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return user;
     }
+
 }

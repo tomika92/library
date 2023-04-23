@@ -3,6 +3,7 @@ package frames;
 import models.User;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -17,10 +18,10 @@ public class LoginFrame extends JFrame {
 
     public User user;
 
-    public LoginFrame(){
+    public LoginFrame() {
         setContentPane(loginPanel);
         setTitle("login");
-        setSize(450,450);
+        setSize(450, 450);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         loginButton.addActionListener(new ActionListener() {
@@ -42,16 +43,16 @@ public class LoginFrame extends JFrame {
         String login = loginField.getText();
         String password = String.valueOf(passwordField.getPassword());
 
-        if (login.isEmpty() || password.isEmpty()){
+        if (login.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter all field", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         password = encodeBase64(password);
         //int userID = checkUser(login, password);
-        user = checkUser(login,password);
+        user = checkUser(login, password);
 
-        if(user.getUserID() == 0){
+        if (user.getUserID() == 0) {
             JOptionPane.showMessageDialog(this, "Login or password are incorrect", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -60,11 +61,10 @@ public class LoginFrame extends JFrame {
         singleton.setValue(user.getUserID());
 
         String roleD = "client";
-        if(roleD.equals(user.getRole())){
+        if (roleD.equals(user.getRole())) {
             UserFrame userF = new UserFrame();
             userF.setVisible(true);
-        }
-        else{
+        } else {
             WorkerFrame workerF = new WorkerFrame();
             workerF.setVisible(true);
         }
@@ -75,22 +75,22 @@ public class LoginFrame extends JFrame {
         //int userID = 0;
         User user = null;
 
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library","root", "MyNewPass");
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM users WHERE password=? AND login=?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, password);
             preparedStatement.setString(2, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 user = new User();
                 user.userID = resultSet.getInt("ID_user");
                 user.role = resultSet.getString("role");
             }
             stmt.close();
             con.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return user;
@@ -105,4 +105,5 @@ public class LoginFrame extends JFrame {
     public static void main(String[] args) {
         LoginFrame myLoginFrame = new LoginFrame();
     }
+
 }
