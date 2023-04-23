@@ -1,6 +1,5 @@
 package frames;
 
-import jdk.jfr.Registered;
 import models.User;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Base64;
 
-public class registerFrame extends JFrame {
+public class RegisterFrame extends JFrame {
     private JTextField loginFieldR;
     private JTextField emailFieldR;
     private JTextField firstNameFieldR;
@@ -21,7 +20,7 @@ public class registerFrame extends JFrame {
 
     public User user;
 
-    public registerFrame(){
+    public RegisterFrame(){
         setContentPane(registerPanel);
         setTitle("register");
         setSize(450,450);

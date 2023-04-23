@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Base64;
 
-public class loginFrame extends JFrame {
+public class LoginFrame extends JFrame {
     private JTextField loginField;
     private JPasswordField passwordField;
     private JButton loginButton;
@@ -17,7 +17,7 @@ public class loginFrame extends JFrame {
 
     public User user;
 
-    public loginFrame(){
+    public LoginFrame(){
         setContentPane(loginPanel);
         setTitle("login");
         setSize(450,450);
@@ -32,7 +32,7 @@ public class loginFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerFrame register = new registerFrame();
+                RegisterFrame register = new RegisterFrame();
                 register.setVisible(true);
             }
         });
@@ -61,11 +61,11 @@ public class loginFrame extends JFrame {
 
         String roleD = "client";
         if(roleD.equals(user.getRole())){
-            userFrame userF = new userFrame();
+            UserFrame userF = new UserFrame();
             userF.setVisible(true);
         }
         else{
-            workerFrame workerF = new workerFrame();
+            WorkerFrame workerF = new WorkerFrame();
             workerF.setVisible(true);
         }
         dispose();
@@ -103,6 +103,6 @@ public class loginFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        loginFrame myLoginFrame = new loginFrame();
+        LoginFrame myLoginFrame = new LoginFrame();
     }
 }
