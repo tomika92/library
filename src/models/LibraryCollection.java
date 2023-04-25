@@ -13,4 +13,5 @@ public interface LibraryCollection {
     String getGenre();
     int getQuantity();
     void fillValues(ResultSet set) throws SQLException;
+
 }

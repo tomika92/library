@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/LibraryCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LibraryCollection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,20 +34,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Studia/VI semestr/Technologie obiektowe/Projekt/library/mysql-connector-j-8.0.33.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propGUI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Studia/VI semestr/Technologie obiektowe/Projekt/library/mysql-connector-j-8.0.33.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Studia\VI semestr\Technologie obiektowe\Projekt\library" />
@@ -79,7 +82,11 @@
       <option name="presentableId" value="Default" />
       <updated>1681828782533</updated>
       <workItem from="1681828783971" duration="14235000" />
-      <workItem from="1682232584372" duration="30225000" />
+      <workItem from="1682232584372" duration="30916000" />
+      <workItem from="1682347817117" duration="1416000" />
+      <workItem from="1682399101850" duration="1031000" />
+      <workItem from="1682435079282" duration="6406000" />
+      <workItem from="1682443704903" duration="4427000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681828888500</created>
@@ -109,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682266003519</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="user interface - search table">
+      <created>1682268517417</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682268517417</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,29 +152,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/Book.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/Film.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/Magazine.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/models/Audiobook.java</url>
           <line>65</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/frames/UserFrame.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
