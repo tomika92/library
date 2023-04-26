@@ -21,6 +21,7 @@ public class UserFrame extends JFrame {
     private JPanel userPanel;
     private JScrollPane SearchPane;
     private JScrollPane BorrowPane;
+    private JButton refreshButton;
 
     public static final String ORDER_BUTTON_LABEL = "Order";
 
@@ -31,6 +32,7 @@ public class UserFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         nameSurnameField.setText(getNameSurname(Singleton.getInstance().getValue()));
+        BorrowTable.setModel(getBorrowTable());
         SearchTable.setModel(getSearchTable());
         SearchTable.getColumn("order").setCellRenderer(new ButtonRenderer());
         SearchTable.getColumn("order").setCellEditor(new ButtonEditor(new JCheckBox()));
@@ -45,12 +47,60 @@ public class UserFrame extends JFrame {
         searchField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                DefaultTableModel model = (DefaultTableModel) SearchTable.getModel();
-                TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
-                SearchTable.setRowSorter(tr);
-                tr.setRowFilter(RowFilter.regexFilter(searchField.getText().trim()));
+                searchBar(searchField, SearchTable);
             }
         });
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BorrowTable.setModel(getBorrowTable());
+                SearchTable.setModel(getSearchTable());
+                SearchTable.getColumn("order").setCellRenderer(new ButtonRenderer());
+                SearchTable.getColumn("order").setCellEditor(new ButtonEditor(new JCheckBox()));
+            }
+        });
+    }
+
+    private void searchBar(JTextField searchField, JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(searchField.getText().trim()));
+    }
+
+    private TableModel getBorrowTable() {
+        Object[][] rows = new Object[0][];
+        try{
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
+            Statement stmt = con.createStatement();
+            String sql = "SELECT rentals.ID_rentals, users.ID_user, collection.ID_zbior, collection.`type`, collection.title, collection.mag_number, collection.author, collection.`year`, collection.publisher, rentals.status, rentals.start_date, rentals.order_end, rentals.to_pick_up_end, rentals.rented_end, rentals.returned_date FROM ((rentals JOIN users ON users.ID_user = rentals.ID_user) JOIN collection ON rentals.ID_zbior = collection.ID_zbior) WHERE rentals.ID_user = ? AND NOT (rentals.status = 'returned' OR rentals.status = 'canceled')";
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, Singleton.getInstance().getValue());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                Task position = new Task();
+                position.fillValues(resultSet);
+                Object[] tab = new Object[0];
+                if(position.getToPickUpEndTime() == null){
+                    tab = new Object[]{position.getType(), position.getTitle(), position.getAuthor(), position.getStatus(), position.getOrderEndTime()};
+                } else if (position.getRentedEndTime() == null) {
+                    tab = new Object[]{position.getType(), position.getTitle(), position.getAuthor(), position.getStatus(), position.getToPickUpEndTime()};
+                } else if (position.getReturnedEndTime() == null) {
+                    tab = new Object[]{position.getType(), position.getTitle(), position.getAuthor(), position.getStatus(), position.getRentedEndTime()};
+                } else if (position.getReturnedEndTime() != null) {
+                    tab = new Object[]{position.getType(), position.getTitle(), position.getAuthor(), position.getStatus(), position.getReturnedEndTime()};
+                }
+
+                rows = Arrays.copyOf(rows, rows.length + 1);
+                rows[rows.length - 1] = tab;
+            }
+            stmt.close();
+            con.close();
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+        String column[] = {"type", "title", "author", "status", "final status end date"};
+        return new DefaultTableModel(rows, column);
     }
 
     private TableModel getSearchTable() {
@@ -68,17 +118,17 @@ public class UserFrame extends JFrame {
                 position.fillValues(resultSet);
                 Object[] tab = new Object[0];
                 if ("BOOK".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Book) position).getAuthor(), String.valueOf(position.getYear()),
-                            position.getPublisher(), " ", position.getGenre(), String.valueOf(position.getQuantity()), position.getID()};
+                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Book) position).getAuthor(), position.getYear(), position.getPublisher(), " ",
+                            position.getGenre(), position.getQuantity(), position.getID()};
                 } else if ("MAGAZINE".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), String.valueOf(((Magazine) position).getNumber()), " ",
-                            String.valueOf(position.getYear()), position.getPublisher(), " ", position.getGenre(), String.valueOf(position.getQuantity()), position.getID()};
+                    tab = new Object[]{position.getType(), position.getTitle(), ((Magazine) position).getNumber(), " ", position.getYear(), position.getPublisher(), " ",
+                            position.getGenre(), position.getQuantity(), position.getID()};
                 } else if ("AUDIOBOOK".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Audiobook) position).getAuthor(), String.valueOf(position.getYear()),
-                            position.getPublisher(), String.valueOf(((Audiobook) position).getTime()), position.getGenre(), String.valueOf(position.getQuantity()), position.getID()};
+                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Audiobook) position).getAuthor(), position.getYear(), position.getPublisher(),
+                            ((Audiobook) position).getTime(), position.getGenre(), position.getQuantity(), position.getID()};
                 } else if ("FILM".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", " ", String.valueOf(position.getYear()), position.getPublisher(),
-                            String.valueOf(((Film) position).getTime()), position.getGenre(), String.valueOf(position.getQuantity()), position.getID()};
+                    tab = new Object[]{position.getType(), position.getTitle(), " ", " ", position.getYear(), position.getPublisher(), ((Film) position).getTime(),
+                            position.getGenre(), position.getQuantity(), position.getID()};
                 }
                 rows = Arrays.copyOf(rows, rows.length + 1);
                 rows[rows.length - 1] = tab;
