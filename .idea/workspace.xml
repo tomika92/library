@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="user interface - order, search, worker interface - search table, search">
-      <change afterPath="$PROJECT_DIR$/src/models/Task.java" afterDir="false" />
+    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="user interface - borrow table, worker interface - task table">
+      <change afterPath="$PROJECT_DIR$/src/frames/AddPositionFrame.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frames/AddPositionFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/LoginFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/LoginFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/RegisterFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/RegisterFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +89,8 @@
       <workItem from="1682435079282" duration="6406000" />
       <workItem from="1682443704903" duration="5994000" />
       <workItem from="1682486810948" duration="412000" />
-      <workItem from="1682520299861" duration="15513000" />
+      <workItem from="1682520299861" duration="16717000" />
+      <workItem from="1682570402072" duration="15776000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681828888500</created>
@@ -132,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682448838628</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="user interface - borrow table, worker interface - task table">
+      <created>1682536056551</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682536056551</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,17 +165,7 @@
     <MESSAGE value="factory" />
     <MESSAGE value="user interface - search table" />
     <MESSAGE value="user interface - order, search, worker interface - search table, search" />
-    <option name="LAST_COMMIT_MESSAGE" value="user interface - order, search, worker interface - search table, search" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/Audiobook.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="user interface - borrow table, worker interface - task table" />
+    <option name="LAST_COMMIT_MESSAGE" value="user interface - borrow table, worker interface - task table" />
   </component>
 </project>

@@ -1,9 +1,7 @@
 package frames;
 
 import models.User;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -18,7 +16,6 @@ public class RegisterFrame extends JFrame {
     private JPasswordField repeatPasswordFieldR;
     private JButton registerButtonR;
     private JPanel registerPanel;
-
     public User user;
 
     public RegisterFrame() {
@@ -59,7 +56,6 @@ public class RegisterFrame extends JFrame {
         }
 
         password = encodeBase64(password);
-
         user = addNewUser(login, email, firstName, lastName, password);
         if (user != null) {
             dispose();
@@ -98,7 +94,6 @@ public class RegisterFrame extends JFrame {
 
     private User addNewUser(String login, String email, String firstName, String lastName, String password) {
         User user = null;
-
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
             Statement stmt = con.createStatement();
@@ -121,5 +116,4 @@ public class RegisterFrame extends JFrame {
         }
         return user;
     }
-
 }

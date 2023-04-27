@@ -1,7 +1,6 @@
 package frames;
 
 import models.*;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -69,6 +68,13 @@ public class WorkerFrame extends JFrame {
                 SearchTable.setModel(getSearchTable());
             }
         });
+        addNew.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddPositionFrame add = new AddPositionFrame();
+                add.setVisible(true);
+            }
+        });
     }
 
     private void cancelExpired() {
@@ -127,7 +133,6 @@ public class WorkerFrame extends JFrame {
                     tab = new Object[]{position.getUserID(), position.getType(), position.getTitle(), position.getMagNr(), position.getAuthor(), position.getYear(),
                             position.getPublisher(), position.getStatus(), position.getReturnedEndTime(), position.getRentalID()};
                 }
-
                 rows = Arrays.copyOf(rows, rows.length + 1);
                 rows[rows.length - 1] = tab;
             }
@@ -335,6 +340,4 @@ class ButtonEditorW extends DefaultCellEditor {
     protected void fireEditingStopped() {
         super.fireEditingStopped();
     }
-
 }
-

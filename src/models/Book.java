@@ -11,19 +11,13 @@ public class Book implements LibraryCollection {
     private String genre;
     private int quantity;
     private String type;
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     private int ID;
 
     public Book() {}
 
+    public int getID() {
+        return ID;
+    }
     public String getAuthor() {
         return author;
     }
@@ -68,30 +62,6 @@ public class Book implements LibraryCollection {
         this.genre = set.getString("genre");
         this.quantity = set.getInt("quantity");
         this.ID = set.getInt("ID_zbior");
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public void setType(String type) {

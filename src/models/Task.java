@@ -43,10 +43,6 @@ public class Task {
         return status;
     }
 
-    public int getCollectionID() {
-        return collectionID;
-    }
-
     public int getRentalID() {
         return rentalID;
     }
@@ -81,10 +77,6 @@ public class Task {
 
     public Date getReturnedEndTime() {
         return returnedEndTime;
-    }
-
-    public Date getStartTime() {
-        return startTime;
     }
 
     public int getMagNr() {

@@ -1,9 +1,7 @@
 package frames;
 
 import models.User;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -15,7 +13,6 @@ public class LoginFrame extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
     private JPanel loginPanel;
-
     public User user;
 
     public LoginFrame() {
@@ -42,16 +39,13 @@ public class LoginFrame extends JFrame {
     private void loginUser() {
         String login = loginField.getText();
         String password = String.valueOf(passwordField.getPassword());
-
         if (login.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter all field", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         password = encodeBase64(password);
-        //int userID = checkUser(login, password);
         user = checkUser(login, password);
-
         if (user.getUserID() == 0) {
             JOptionPane.showMessageDialog(this, "Login or password are incorrect", "Try again", JOptionPane.ERROR_MESSAGE);
             return;
@@ -59,7 +53,6 @@ public class LoginFrame extends JFrame {
 
         Singleton singleton = Singleton.getInstance();
         singleton.setValue(user.getUserID());
-
         String roleD = "client";
         if (roleD.equals(user.getRole())) {
             UserFrame userF = new UserFrame();
@@ -72,7 +65,6 @@ public class LoginFrame extends JFrame {
     }
 
     private User checkUser(String login, String password) {
-        //int userID = 0;
         User user = null;
 
         try {
@@ -105,5 +97,4 @@ public class LoginFrame extends JFrame {
     public static void main(String[] args) {
         LoginFrame myLoginFrame = new LoginFrame();
     }
-
 }

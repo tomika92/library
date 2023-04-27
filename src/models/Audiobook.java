@@ -33,7 +33,6 @@ public class Audiobook implements LibraryCollection {
     public int getID() {
         return ID;
     }
-
     @Override
     public String getTitle() {
         return title;
@@ -72,39 +71,7 @@ public class Audiobook implements LibraryCollection {
         this.ID = set.getInt("ID_zbior");
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 }
