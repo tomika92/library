@@ -1,6 +1,9 @@
 package frames;
 
-import models.*;
+import repository.CollectionRepository;
+import repository.RentalRepository;
+import repository.UserRepository;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -9,9 +12,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class WorkerFrame extends JFrame {
     private JLabel nameSurnameFrame;
@@ -34,7 +35,7 @@ public class WorkerFrame extends JFrame {
         setSize(1200, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        nameSurnameFrame.setText(getNameSurname(Singleton.getInstance().getValue()));
+        nameSurnameFrame.setText(UserRepository.getNameSurname(UserDataSingleton.getInstance().getValue()));
         cancelExpired();
         TaskTable.setModel(getTaskTable());
         TaskTable.getColumn("action").setCellRenderer(new ButtonRendererW());
@@ -78,24 +79,8 @@ public class WorkerFrame extends JFrame {
     }
 
     private void cancelExpired() {
-        LocalDate now = LocalDate.now();
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * from rentals WHERE NOT (status = 'returned' OR status = 'canceled')";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                if(("ordered".equals(resultSet.getString("status")) && resultSet.getDate("order_end").before(Date.valueOf(now))) || ("to_pick_up".equals(resultSet.getString("status")) && resultSet.getDate("to_pick_up_end").before(Date.valueOf(now)))){
-                    String sqlU = "UPDATE rentals SET status = 'canceled' WHERE ID_rentals = ?";
-                    PreparedStatement preparedStatementU = con.prepareStatement(sqlU);
-                    preparedStatementU.setInt(1, resultSet.getInt("ID_rentals"));
-                    preparedStatementU.executeUpdate();
-                    ButtonEditorW.changeQuantity(resultSet.getInt("ID_user"), resultSet.getInt("ID_zbior"));
-                }
-            }
-            stmt.close();
-            con.close();
+        try {
+            RentalRepository.cancelExpired();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -109,102 +94,27 @@ public class WorkerFrame extends JFrame {
     }
 
     private TableModel getTaskTable() {
-        Object[][] rows = new Object[0][];
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT rentals.ID_rentals, users.ID_user, collection.ID_zbior, collection.`type`, collection.title, collection.mag_number, collection.author, collection.`year`, collection.publisher, rentals.status, rentals.start_date, rentals.order_end, rentals.to_pick_up_end, rentals.rented_end, rentals.returned_date FROM ((rentals JOIN users ON users.ID_user = rentals.ID_user) JOIN collection ON rentals.ID_zbior = collection.ID_zbior) WHERE NOT (rentals.status = 'returned' OR rentals.status = 'canceled')";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                Task position = new Task();
-                position.fillValues(resultSet);
-                Object[] tab = new Object[0];
-                if(position.getToPickUpEndTime() == null){
-                    tab = new Object[]{position.getUserID(), position.getType(), position.getTitle(), position.getMagNr(), position.getAuthor(), position.getYear(),
-                            position.getPublisher(), position.getStatus(), position.getOrderEndTime(), position.getRentalID()};
-                } else if (position.getRentedEndTime() == null) {
-                    tab = new Object[]{position.getUserID(), position.getType(), position.getTitle(), position.getMagNr(), position.getAuthor(), position.getYear(),
-                            position.getPublisher(), position.getStatus(), position.getToPickUpEndTime(), position.getRentalID()};
-                } else if (position.getReturnedEndTime() == null) {
-                    tab = new Object[]{position.getUserID(), position.getType(), position.getTitle(), position.getMagNr(), position.getAuthor(), position.getYear(),
-                            position.getPublisher(), position.getStatus(), position.getRentedEndTime(), position.getRentalID()};
-                } else if (position.getReturnedEndTime() != null) {
-                    tab = new Object[]{position.getUserID(), position.getType(), position.getTitle(), position.getMagNr(), position.getAuthor(), position.getYear(),
-                            position.getPublisher(), position.getStatus(), position.getReturnedEndTime(), position.getRentalID()};
-                }
-                rows = Arrays.copyOf(rows, rows.length + 1);
-                rows[rows.length - 1] = tab;
-            }
-            stmt.close();
-            con.close();
-        }catch (Exception e) {
+        Object[][] rows = null;
+        try {
+            rows = CollectionRepository.getWorkerTaskTable();
+        } catch (Exception e) {
             System.out.println(e);
         }
-        String column[] = {"ID_user", "type", "title", "number", "author", "year", "publisher",  "status", "final status end date", "action"};
+        String[] column = {"ID_user", "type", "title", "number", "author", "year", "publisher", "status", "final status end date", "action"};
         return new DefaultTableModel(rows, column);
     }
 
     private TableModel getSearchTable() {
-        String type;
-        Object[][] rows = new Object[0][];
+        Object[][] rows = null;
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM collection";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                type = resultSet.getString("type");
-                LibraryCollection position = LibraryCollectionFactory.getType(LibraryCollectionFactory.CollectionType.valueOf(type));
-                position.fillValues(resultSet);
-                Object[] tab = new Object[0];
-                if ("BOOK".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Book) position).getAuthor(), position.getYear(), position.getPublisher(), " ",
-                            position.getGenre(), position.getQuantity()};
-                } else if ("MAGAZINE".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), ((Magazine) position).getNumber(), " ", position.getYear(), position.getPublisher(), " ",
-                            position.getGenre(), position.getQuantity()};
-                } else if ("AUDIOBOOK".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", ((Audiobook) position).getAuthor(), position.getYear(), position.getPublisher(),
-                            ((Audiobook) position).getTime(), position.getGenre(),position.getQuantity()};
-                } else if ("FILM".equals(position.getType())) {
-                    tab = new Object[]{position.getType(), position.getTitle(), " ", " ", position.getYear(), position.getPublisher(), ((Film) position).getTime(),
-                            position.getGenre(), position.getQuantity()};
-                }
-                rows = Arrays.copyOf(rows, rows.length + 1);
-                rows[rows.length - 1] = tab;
-            }
-            stmt.close();
-            con.close();
+            rows = CollectionRepository.getWorkerSearchTable();
         } catch (Exception e) {
             System.out.println(e);
         }
-        String column[] = {"type", "title", "number", "author", "year", "publisher", "time", "genre", "quantity"};
+        String[] column = {"type", "title", "number", "author", "year", "publisher", "time", "genre", "quantity"};
         return new DefaultTableModel(rows, column);
     }
 
-    private String getNameSurname(int userID) {
-        StringBuilder user = new StringBuilder();
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM users WHERE ID_user=?";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setInt(1, userID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user.append(resultSet.getString("first_name"));
-                user.append(" ");
-                user.append(resultSet.getString("last_name"));
-            }
-            stmt.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return user.toString();
-    }
 }
 
 class ButtonRendererW extends JButton implements TableCellRenderer {
@@ -267,66 +177,13 @@ class ButtonEditorW extends DefaultCellEditor {
             changeStatus();
         }
         isPushed = false;
-        return new String(label);
+        return label;
     }
 
     private void changeStatus() {
         LocalDate now = LocalDate.now();
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM rentals WHERE ID_rentals = ?";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                if("ordered".equals(resultSet.getString("status"))){
-                    LocalDate date = now.plusDays(5);
-                    String sqlO = "UPDATE rentals SET status = 'to_pick_up', order_end = ?, to_pick_up_end = ? WHERE ID_rentals = ?";
-                    PreparedStatement preparedStatementO = con.prepareStatement(sqlO);
-                    preparedStatementO.setDate(1, Date.valueOf(now));
-                    preparedStatementO.setDate(2, Date.valueOf(date));
-                    preparedStatementO.setInt(3, id);
-                    preparedStatementO.executeUpdate();
-                } else if ("to_pick_up".equals(resultSet.getString("status"))) {
-                    LocalDate date = now.plusDays(21);
-                    String sqlP = "UPDATE rentals SET status = 'rented', to_pick_up_end = ?, rented_end = ? WHERE ID_rentals = ?";
-                    PreparedStatement preparedStatementP = con.prepareStatement(sqlP);
-                    preparedStatementP.setDate(1, Date.valueOf(now));
-                    preparedStatementP.setDate(2, Date.valueOf(date));
-                    preparedStatementP.setInt(3, id);
-                    preparedStatementP.executeUpdate();
-                } else if ("rented".equals(resultSet.getString("status"))) {
-                    String sqlR = "UPDATE rentals SET status = 'returned', rented_end = ?, returned_date = ? WHERE ID_rentals = ?";
-                    PreparedStatement preparedStatementR = con.prepareStatement(sqlR);
-                    preparedStatementR.setDate(1, Date.valueOf(now));
-                    preparedStatementR.setDate(2, Date.valueOf(now));
-                    preparedStatementR.setInt(3, id);
-                    preparedStatementR.executeUpdate();
-                    changeQuantity(resultSet.getInt("ID_user"), resultSet.getInt("ID_zbior"));
-                }
-            }
-            stmt.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public static void changeQuantity(int user_ID, int collection_ID) {
-        try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sqlU = "UPDATE users SET books_nr = books_nr + 1 WHERE ID_user = ?";
-            PreparedStatement preparedStatementU = con.prepareStatement(sqlU);
-            preparedStatementU.setInt(1, user_ID);
-            preparedStatementU.executeUpdate();
-            String sqlC = "UPDATE collection SET quantity = quantity + 1 WHERE ID_zbior = ?";
-            PreparedStatement preparedStatementC = con.prepareStatement(sqlC);
-            preparedStatementC.setInt(1,collection_ID);
-            preparedStatementC.executeUpdate();
-            stmt.close();
-            con.close();
+            RentalRepository.changeStatus(id);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -1,10 +1,11 @@
 package frames;
 
 import models.User;
+import repository.UserRepository;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.util.Base64;
 
 public class LoginFrame extends JFrame {
@@ -51,8 +52,8 @@ public class LoginFrame extends JFrame {
             return;
         }
 
-        Singleton singleton = Singleton.getInstance();
-        singleton.setValue(user.getUserID());
+        UserDataSingleton userDataSingleton = UserDataSingleton.getInstance();
+        userDataSingleton.setValue(user.getUserID());
         String roleD = "client";
         if (roleD.equals(user.getRole())) {
             UserFrame userF = new UserFrame();
@@ -68,20 +69,7 @@ public class LoginFrame extends JFrame {
         User user = null;
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM users WHERE password=? AND login=?";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, password);
-            preparedStatement.setString(2, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = new User();
-                user.userID = resultSet.getInt("ID_user");
-                user.role = resultSet.getString("role");
-            }
-            stmt.close();
-            con.close();
+            user = UserRepository.checkUserForLogin(login, password);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -1,10 +1,11 @@
 package frames;
 
 import models.User;
+import repository.UserRepository;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.util.Base64;
 
 public class RegisterFrame extends JFrame {
@@ -67,19 +68,7 @@ public class RegisterFrame extends JFrame {
     private boolean checkUser(String login, String email) {
         boolean var = true;
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "SELECT ID_user FROM users WHERE email=? OR login=?";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, login);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                var = false;
-            }
-            stmt.close();
-            con.close();
+            var = UserRepository.checkUserForRegister(login, email);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -95,22 +84,7 @@ public class RegisterFrame extends JFrame {
     private User addNewUser(String login, String email, String firstName, String lastName, String password) {
         User user = null;
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/library", "root", "MyNewPass");
-            Statement stmt = con.createStatement();
-            String sql = "INSERT INTO users (login, email, first_name, last_name, password) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(1, login);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, firstName);
-            preparedStatement.setString(4, lastName);
-            preparedStatement.setString(5, password);
-
-            int addedRow = preparedStatement.executeUpdate();
-            if (addedRow > 0) {
-                user = new User(firstName, lastName, login, password, email);
-            }
-            stmt.close();
-            con.close();
+            user = UserRepository.addNewUser(login, email, firstName, lastName, password);
         } catch (Exception e) {
             System.out.println(e);
         }

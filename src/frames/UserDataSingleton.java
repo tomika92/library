@@ -1,10 +1,10 @@
 package frames;
 
-public final class Singleton {
-    private static Singleton instance;
+public final class UserDataSingleton {
+    private static UserDataSingleton instance;
     public int value;
 
-    private Singleton(){
+    private UserDataSingleton(){
     }
 
     public int getValue() {
@@ -15,9 +15,9 @@ public final class Singleton {
         this.value = value;
     }
 
-    public static Singleton getInstance(){
+    public static UserDataSingleton getInstance(){
         if(instance == null){
-            instance = new Singleton();
+            instance = new UserDataSingleton();
         }
         return instance;
     }
