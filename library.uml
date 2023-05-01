@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/Studia/VI semestr/Technologie obiektowe/Projekt/library</OriginalElement>
+  <nodes>
+    <node x="6835.744368935038" y="1624.3254186884583">com.intellij.uiDesigner.core.VerticalInfo</node>
+    <node x="1723.005081063312" y="888.4871547316131">models.User</node>
+    <node x="2107.506366829707" y="1438.8059535898765">repository.UserRepository</node>
+    <node x="2671.394039242664" y="1353.7928462862642">models.LibraryCollectionFactory</node>
+    <node x="8562.538227984522" y="952.3539376009604">frames.ButtonEditor</node>
+    <node x="4756.3990595965115" y="1288.731109149388">repository.RentalRepository</node>
+    <node x="4327.991524887538" y="1287.5599183921186">models.Book</node>
+    <node x="7948.158211148385" y="1076.314475488929">com.intellij.uiDesigner.core.AbstractLayout</node>
+    <node x="5444.0525783881085" y="977.7844308675224">repository.CollectionRepository</node>
+    <node x="-29.835176171194462" y="1477.6011945836112">com.intellij.uiDesigner.core.Util</node>
+    <node x="4447.089496466193" y="1108.3252823688404">com.intellij.uiDesigner.core.SupportCode</node>
+    <node x="6122.427152299963" y="1701.2669920642297">frames.ButtonEditorW</node>
+    <node x="1172.1502504456635" y="8.711695703964438">com.intellij.uiDesigner.core.GridLayoutManager</node>
+    <node x="2421.3791024172524" y="1085.8715830645565">models.LibraryCollection</node>
+    <node x="1603.3578672822891" y="1536.938858157986">models.Audiobook</node>
+    <node x="2974.99702757695" y="1029.4359428604093">com.intellij.uiDesigner.core.HorizontalInfo</node>
+    <node x="6017.3937842589385" y="1171.3430755177744">com.intellij.uiDesigner.core.LayoutState</node>
+    <node x="7059.120011418268" y="1273.5077929053134">connection.DbConnectionProvider</node>
+    <node x="3355.882978959839" y="1326.114981157783">frames.UserDataSingleton</node>
+    <node x="8278.47288671413" y="633.9375802064736">frames.UserFrame</node>
+    <node x="3839.743725586675" y="1302.2303451769708">frames.LoginFrame</node>
+    <node x="5714.026732842528" y="1339.597109185015">models.Task</node>
+    <node x="3598.6947367468483" y="795.3192018320639">models.Film</node>
+    <node x="-90.91621885427617" y="896.7350536698937">models.Magazine</node>
+    <node x="4857.071229598515" y="1103.1397545574482">frames.ButtonRendererW</node>
+    <node x="7356.557719884231" y="1482.7286813558899">frames.ButtonRenderer</node>
+    <node x="7680.152616151831" y="1195.8718327383463">com.intellij.uiDesigner.core.Spacer</node>
+    <node x="4067.336498443177" y="879.7360363188758">frames.AddPositionFrame</node>
+    <node x="5193.143761584941" y="1321.5213863450765">frames.WorkerFrame</node>
+    <node x="6500.742155425858" y="-14.112898631684743">com.intellij.uiDesigner.core.GridConstraints</node>
+    <node x="761.4143540221355" y="1492.360646299428">frames.RegisterFrame</node>
+    <node x="429.2656279191917" y="693.347175224336">com.intellij.uiDesigner.core.DimensionInfo</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="frames.UserFrame" target="frames.ButtonEditor" relationship="CREATE">
+      <point x="111.5" y="165.5" />
+      <point x="-216.0" y="-108.9163573944868" />
+    </edge>
+    <edge source="frames.WorkerFrame" target="frames.AddPositionFrame" relationship="CREATE">
+      <point x="0.0" y="-206.0" />
+      <point x="5304.643761584941" y="1052.7360363188757" />
+      <point x="103.0" y="0.0" />
+    </edge>
+    <edge source="frames.WorkerFrame" target="frames.ButtonEditorW" relationship="CREATE">
+      <point x="0.0" y="206.0" />
+      <point x="5304.643761584941" y="2075.0" />
+      <point x="6338.427152299963" y="2075.0" />
+      <point x="0.0" y="128.9999999999999" />
+    </edge>
+    <edge source="frames.LoginFrame" target="frames.UserFrame" relationship="CREATE">
+      <point x="-15.0" y="-140.0" />
+      <point x="3927.743725586675" y="-61.61289863168474" />
+      <point x="8389.97288671413" y="-61.61289863168474" />
+      <point x="0.0" y="-173.0" />
+    </edge>
+    <edge source="models.Magazine" target="models.LibraryCollection" relationship="REALIZATION">
+      <point x="-45.41878114572387" y="227.9999463301064" />
+      <point x="-47.335000000000036" y="2060.0" />
+      <point x="2510.379" y="2060.0" />
+      <point x="-1.024172524921596E-4" y="115.00041693544358" />
+    </edge>
+    <edge source="frames.LoginFrame" target="frames.WorkerFrame" relationship="CREATE">
+      <point x="15.0" y="-140.0" />
+      <point x="3957.743725586675" y="762.8192018320639" />
+      <point x="5319.643761584941" y="762.8192018320639" />
+      <point x="15.0" y="-206.0" />
+    </edge>
+    <edge source="models.Book" target="models.LibraryCollection" relationship="REALIZATION">
+      <point x="4.7511246248177486E-4" y="228.00008160788127" />
+      <point x="4416.992" y="2060.0" />
+      <point x="2510.379" y="2060.0" />
+      <point x="-1.024172524921596E-4" y="115.00041693544358" />
+    </edge>
+    <edge source="repository.UserRepository" target="models.User" relationship="CREATE">
+      <point x="0.0" y="-94.5" />
+      <point x="2272.006366829707" y="1160.4871547316131" />
+      <point x="131.0" y="0.0" />
+    </edge>
+    <edge source="frames.RegisterFrame" target="models.User" relationship="TO_ONE">
+      <point x="164.49964597786447" y="-145.92164629942818" />
+      <point x="1854.005" y="1519.4389999999999" />
+      <point x="-8.106331199542183E-5" y="271.9998452683869" />
+    </edge>
+    <edge source="models.LibraryCollectionFactory" target="models.Magazine" relationship="CREATE">
+      <point x="0.0" y="-39.5" />
+      <point x="2809.394039242664" y="-76.61289863168474" />
+      <point x="-1.916218854276167" y="-76.61289863168474" />
+      <point x="0.0" y="-228.0" />
+    </edge>
+    <edge source="frames.LoginFrame" target="models.User" relationship="TO_ONE">
+      <point x="2.7441332531452645E-4" y="139.99965482302935" />
+      <point x="3942.744" y="1756.0" />
+      <point x="1854.005" y="1756.0" />
+      <point x="-8.106331199542183E-5" y="271.9998452683869" />
+    </edge>
+    <edge source="frames.LoginFrame" target="frames.RegisterFrame" relationship="CREATE">
+      <point x="-30.0" y="-140.0" />
+      <point x="3912.743725586675" y="-8.788304296035562" />
+      <point x="925.9143540221355" y="-8.788304296035562" />
+      <point x="0.0" y="-173.0" />
+    </edge>
+    <edge source="frames.UserFrame" target="frames.ButtonRenderer" relationship="CREATE">
+      <point x="-111.5" y="0.0" />
+      <point x="7566.557719884231" y="806.9375802064736" />
+      <point x="0.0" y="-39.5" />
+    </edge>
+    <edge source="models.LibraryCollectionFactory" target="models.Audiobook" relationship="CREATE">
+      <point x="-15.0" y="-39.5" />
+      <point x="2794.394039242664" y="777.8192018320639" />
+      <point x="1692.3578672822891" y="777.8192018320639" />
+      <point x="0.0" y="-250.0" />
+    </edge>
+    <edge source="models.LibraryCollectionFactory" target="models.Film" relationship="CREATE">
+      <point x="15.0" y="-39.5" />
+      <point x="2824.394039242664" y="1011.9359428604093" />
+      <point x="-89.0" y="-11.383258971654499" />
+    </edge>
+    <edge source="models.Audiobook" target="models.LibraryCollection" relationship="REALIZATION">
+      <point x="1.32717710698671E-4" y="250.00014184201416" />
+      <point x="1692.358" y="2060.0" />
+      <point x="2510.379" y="2060.0" />
+      <point x="-1.024172524921596E-4" y="115.00041693544358" />
+    </edge>
+    <edge source="repository.CollectionRepository" target="models.Task" relationship="CREATE">
+      <point x="163.5" y="138.49999999999997" />
+      <point x="-33.97415445441948" y="-349.0" />
+    </edge>
+    <edge source="models.LibraryCollectionFactory" target="models.Book" relationship="CREATE">
+      <point x="0.0" y="39.5" />
+      <point x="2809.394039242664" y="1599.7303451769708" />
+      <point x="-89.0" y="84.170426784852" />
+    </edge>
+    <edge source="frames.WorkerFrame" target="frames.ButtonRendererW" relationship="CREATE">
+      <point x="-35.07253198642593" y="-206.0" />
+      <point x="202.5" y="39.5" />
+    </edge>
+    <edge source="models.Film" target="models.LibraryCollection" relationship="REALIZATION">
+      <point x="2.6325315184294595E-4" y="227.99979816793612" />
+      <point x="3687.695" y="2060.0" />
+      <point x="2510.379" y="2060.0" />
+      <point x="-1.024172524921596E-4" y="115.00041693544358" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="4452.0" y="946.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
