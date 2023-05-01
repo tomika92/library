@@ -39,7 +39,6 @@ public class CollectionRepository {
         preparedStatementInsert.setInt(2, UserDataSingleton.getInstance().getValue());
         preparedStatementInsert.executeUpdate();
 
-
         stmt.close();
         con.close();
     }
@@ -198,7 +197,6 @@ public class CollectionRepository {
         preparedStatement.executeUpdate();
         stmt.close();
         con.close();
-
     }
 
     public static void insertToDB(String type, String title, String magNr, String author, String year, String publisher, String genre, String time, String quantity) throws Exception {
@@ -252,6 +250,5 @@ public class CollectionRepository {
         }
         stmt.close();
         con.close();
-
     }
 }

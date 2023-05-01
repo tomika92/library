@@ -13,5 +13,4 @@ public class DbConnectionProvider {
     public static Connection provideDbConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
-
 }

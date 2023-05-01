@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="added position to collection">
-      <change afterPath="$PROJECT_DIR$/src/connection/DbConnectionProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/CollectionRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/RentalRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository/UserRepository.java" afterDir="false" />
+    <list default="true" id="3362013a-fbe1-4d0a-8604-755a5ee2ea10" name="Changes" comment="code cleaning">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/AddPositionFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/AddPositionFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/LoginFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/RegisterFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/Singleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserDataSingleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/UserFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UserFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/WorkerFrame.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/WorkerFrame.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository/CollectionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/CollectionRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +87,8 @@
       <workItem from="1682486810948" duration="412000" />
       <workItem from="1682520299861" duration="16717000" />
       <workItem from="1682570402072" duration="17546000" />
-      <workItem from="1682866796218" duration="7130000" />
+      <workItem from="1682866796218" duration="7753000" />
+      <workItem from="1682921914501" duration="1026000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1681828888500</created>
@@ -154,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682600925142</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="code cleaning">
+      <created>1682874608614</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682874608614</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +179,7 @@
     <MESSAGE value="user interface - order, search, worker interface - search table, search" />
     <MESSAGE value="user interface - borrow table, worker interface - task table" />
     <MESSAGE value="added position to collection" />
-    <option name="LAST_COMMIT_MESSAGE" value="added position to collection" />
+    <MESSAGE value="code cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="code cleaning" />
   </component>
 </project>
